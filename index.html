@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lottery Number</title>
+  </head>
+  <body>
+    <div id="payout"></div>
+  </body>
+  <script>
+	const winningNo = [12, 15, 24, 35, 48];
+    const winningLucky = 3;
+
+	
+    let number_arr = [];
+	for (let i=0; i<5; i++) {
+		number_arr.push(getRandomInt(1, 48));
+	}
+
+    let lucky_num = getRandomInt(1, 18);
+
+    document.write("My pick: ", number_arr.join(" "));
+	
+    document.write(" lucky ", lucky_num);
+
+    let sortedNumbers = number_arr.slice();
+	// sort your pick
+    sortedNumbers.sort(function (a, b) {
+      return a - b;
+    });
+
+    document.write("<br>", "My pick sorted: ", sortedNumbers.join(" "));
+	
+    document.write(" lucky ", lucky_num);
+    document.write("<br>Winning numbers: ", winningNo.join(" "));
+    document.write(" lucky ", winningLucky);
+
+    payout(number_arr, lucky_num);
+	  
+    function payout(pick, luckyBall) {
+      //   check if any of the numbers of the pick matches the winning pick numbers
+      let intersection = [];
+	  for (let i=0; i<5; i++) {
+		  if (pick[i] === winningNo[i]) {
+			  intersection.push(pick[i]);
+		  }
+	  }
+      const numOfMatch = intersection.length;
+
+      document.write("<br>Numbers matching: ", intersection.length);
+      const luckyBallMatch = luckyBall === winningLucky ? true : false;
+
+      if (luckyBallMatch) {
+        document.write("<br>Lucky ball matches");
+      } else {
+        document.write("<br>Lucky ball does not match");
+      }
+
+      if (
+        (numOfMatch === 0 && luckyBallMatch === false) ||
+        (numOfMatch === 1 && luckyBallMatch === false)
+      ) {
+        document.write(
+          "<br>You win nothing.");
+      } else if (numOfMatch === 0 && luckyBallMatch === true) {
+        document.write(
+          "<br>Your winnings: $4.");
+      } else if (numOfMatch === 1 && luckyBallMatch === true) {
+        document.write(
+          "<br>Your winnings: $6");
+      } else if (numOfMatch === 2 && luckyBallMatch === false) {
+        document.write(
+          "<br>Your winnings: $3");
+      } else if (numOfMatch === 2 && luckyBallMatch === true) {
+        document.write(
+          "<br>Your winnings: $25");
+      } else if (numOfMatch === 3 && luckyBallMatch === false) {
+        document.write(
+          "<br>Your winnings: $20");
+      } else if (numOfMatch === 3 && luckyBallMatch === true) {
+        document.write(
+          "<br>Your winnings: $150");
+      } else if (numOfMatch === 4 && luckyBallMatch === false) {
+        document.write(
+          "<br>Your winnings: $200");
+      } else if (numOfMatch === 4 && luckyBallMatch === true) {
+        document.write(
+          "<br>Your winnings: $5,000");
+      } else if (numOfMatch === 5 && luckyBallMatch === false) {
+        document.write(
+          "<br>Your winnings: $25,000 a YEAR for LIFE");
+      } else if (numOfMatch === 5 && luckyBallMatch === true) {
+        document.write(
+          "<br>Your winnings: $7,000 a WEEK for LIFE");
+      }
+    }
+
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max-min+1)) + min;
+	}
+  </script>
+</html>
