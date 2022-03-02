@@ -10,35 +10,27 @@
   <script>
 	const winningNo = [12, 15, 24, 35, 48];
     const winningLucky = 3;
-
-	
     let number_arr = [];
 	for (let i=0; i<5; i++) {
 		number_arr.push(getRandomInt(1, 48));
 	}
-
     let lucky_num = getRandomInt(1, 18);
 
     document.write("My pick: ", number_arr.join(" "));
 	
     document.write(" lucky ", lucky_num);
 
-    let sortedNumbers = number_arr.slice();
-	// sort your pick
-    sortedNumbers.sort(function (a, b) {
+    number_arr.sort(function (a, b) {
       return a - b;
     });
-
-    document.write("<br>", "My pick sorted: ", sortedNumbers.join(" "));
+    document.write("<br>", "My pick sorted: ", number_arr.join(" "));
 	
     document.write(" lucky ", lucky_num);
     document.write("<br>Winning numbers: ", winningNo.join(" "));
     document.write(" lucky ", winningLucky);
-
     payout(number_arr, lucky_num);
-	  
+
     function payout(pick, luckyBall) {
-      //   check if any of the numbers of the pick matches the winning pick numbers
       let intersection = [];
 	  for (let i=0; i<5; i++) {
 		  if (pick[i] === winningNo[i]) {
@@ -48,6 +40,7 @@
       const numOfMatch = intersection.length;
 
       document.write("<br>Numbers matching: ", intersection.length);
+
       const luckyBallMatch = luckyBall === winningLucky ? true : false;
 
       if (luckyBallMatch) {
